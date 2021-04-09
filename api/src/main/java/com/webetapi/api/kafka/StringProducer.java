@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class StringProducer {
 
-    private static final Logger logger = LoggerFactory.getLogger(StringProducer.class);
+    /*private static final Logger logger = LoggerFactory.getLogger(StringProducer.class);
     private static final String TOPIC = "topicRemil2";
 
     @Autowired
@@ -19,7 +19,7 @@ public class StringProducer {
     public void sendMessage(String message){
         logger.info(String.format("$$ -> Producing message --> %s",message));
         this.kafkaTemplate.send(TOPIC,message);
-    }
+    }*/
 
 
 

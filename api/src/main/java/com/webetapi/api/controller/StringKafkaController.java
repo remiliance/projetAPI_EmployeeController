@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/kafka")
 public class StringKafkaController {
 
-    private final StringProducer producer;
+
+    // http://localhost:9000/kafka/publish?message="test5"
+
+   /* private final StringProducer producer;
 
     @Autowired
     StringKafkaController(StringProducer producer) {
@@ -25,5 +28,5 @@ public class StringKafkaController {
     @PostMapping(value = "/publish")
     public void sendMessageToKafkaTopic(@RequestParam("message") String message) {
         this.producer.sendMessage(message);
-    }
+    }*/
 }
