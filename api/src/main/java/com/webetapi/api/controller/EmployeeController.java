@@ -2,6 +2,9 @@ package com.webetapi.api.controller;
 
 import com.webetapi.api.model.Employee;
 import com.webetapi.api.service.EmployeeService;
+import lombok.extern.java.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +16,8 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+     Logger LOG = LoggerFactory.getLogger(EmployeeService.class);
+
     /**
      * Create - Add a new employee
      * @param employee An object employee
@@ -20,6 +25,9 @@ public class EmployeeController {
      */
     @PostMapping("/employee")
     public Employee createEmployee(@RequestBody Employee employee) {
+        LOG.info("Go request Employees");
+
+
         return employeeService.saveEmployee(employee);
     }
 
@@ -33,6 +41,7 @@ public class EmployeeController {
     public Employee getEmployee(@PathVariable("id") final Long id) {
         Optional<Employee> employee = employeeService.getEmployee(id);
         if(employee.isPresent()) {
+            LOG.info("Go request Employee ID");
             return employee.get();
         } else {
             return null;
@@ -45,8 +54,15 @@ public class EmployeeController {
      */
     @GetMapping("/employees")
     public Iterable<Employee> getEmployees() {
+
+        LOG.trace("A TRACE Message");
+        LOG.debug("A DEBUG Message");
+        LOG.info("An INFO Message");
+        LOG.warn("A WARN Message");
+        LOG.error("An ERROR Message");
         return employeeService.getEmployees();
     }
+
 
     /**
      * Update - Update an existing employee
