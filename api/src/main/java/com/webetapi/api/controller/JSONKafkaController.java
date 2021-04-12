@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("producer")
 public class JSONKafkaController {
 
-    private final JsonItemProducer producer;
+  /*  private final JsonItemProducer producer;
     private final JsonItemConsumer consumer;
 
     @Autowired
@@ -21,11 +21,9 @@ public class JSONKafkaController {
         this.consumer = consumer;
     }
 
-    @PostMapping(value = "/postItem"/*,consumes = {"application/json"},produces = {"application/json"}*/)
+    @PostMapping(value = "/postItem")
     public String postJsonMessage(@RequestBody Item item){
-       // KafkaJsontemplate.send(TOPIC_NAME,new Item(1,"Lenovo","Laptop"));
-        //KafkaJsontemplate.send(TOPIC_NAME,(item));
-        this.producer.sendMessage(item);
+          this.producer.sendMessage(item);
         return "Message published successfully";
-    }
+    }*/
 }
