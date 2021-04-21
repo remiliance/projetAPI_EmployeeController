@@ -47,15 +47,16 @@ public class Employee implements Serializable {
 
 
     // bidrection avec Company et Employee
-    @OneToMany(mappedBy = "employee")
+
+    @OneToMany(cascade=CascadeType.PERSIST)
+    @JoinColumn(name="employee_id", referencedColumnName = "id")
     private List<Company> companies;
 
 // on peut aussi voir la table commande comme une table "normale" et ainsi vouloir récuprer les commandes de l'employee
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade=CascadeType.PERSIST)
     @JoinColumn(name="PersonID", referencedColumnName = "id")
     private List <Commande> commandes;
-
 
     public Long getId() {
         return id;

@@ -14,14 +14,12 @@ public class Company implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private Long employee_id;
 
-
-   // private Long employee_id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+  /*  @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", nullable=false)
     private Employee employee;
-
+*/
     // ...
 
 
@@ -36,12 +34,5 @@ public class Company implements Serializable {
         this.id = id;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
 }
 
