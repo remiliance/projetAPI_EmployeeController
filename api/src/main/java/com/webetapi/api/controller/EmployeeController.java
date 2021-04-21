@@ -1,13 +1,17 @@
 package com.webetapi.api.controller;
 
+import com.webetapi.api.exceptions.EmployeeIntrouvableException;
 import com.webetapi.api.model.Employee;
 import com.webetapi.api.service.EmployeeService;
 import lombok.extern.java.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.Optional;
 
 @RestController
@@ -24,11 +28,18 @@ public class EmployeeController {
      * @return The employee object saved
      */
     @PostMapping("/employee")
-    public Employee createEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<Void> createEmployee(@RequestBody Employee employee) {
         LOG.info("Go request Employees");
+        Employee employeeAdded = employeeService.saveEmployee(employee);
 
+        // pour avoir le code retour 201 "Created" et non 200
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(employeeAdded.getId())
+                .toUri();
 
-        return employeeService.saveEmployee(employee);
+        return ResponseEntity.created(location).build();
     }
 
 
@@ -44,6 +55,7 @@ public class EmployeeController {
             LOG.info("Go request Employee ID");
             return employee.get();
         } else {
+           if (employee.isEmpty()) throw new EmployeeIntrouvableException("L'employee avec l'id " + id + " est INTROUVABLE. Écran Bleu si je pouvais.");
             return null;
         }
     }
