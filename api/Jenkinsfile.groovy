@@ -1,5 +1,5 @@
 node {
-  try{
+ 
     def buildNum = env.BUILD_NUMBER 
     def branchName= env.BRANCH_NAME
     
@@ -26,8 +26,4 @@ node {
          def customImage = docker.build("$imageName")
          customImage.push()
       }
-  
-   } finally {
-    cleanWs()
-  }
 }
