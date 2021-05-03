@@ -17,7 +17,7 @@ node {
     
     stage('Build Maven') {
         echo 'debut du build'
-        sh 'mvn -DskipTests=true package' 
+        sh 'mvn package -Dmaven.test.skip=true' 
         docker.build("$IMAGE", '.')
     }
    
