@@ -11,8 +11,8 @@ node {
    
    stage('Clone') {
         git 'https://github.com/remiliance/projet_panier_produit.git'
-    
     }
+ 
     stage('Build Maven') {
         echo 'debut du build'
         sh 'mvn -DskipTests=true package' 
@@ -26,4 +26,5 @@ node {
          def customImage = docker.build("$imageName")
          customImage.push()
       }
+   }
 }
