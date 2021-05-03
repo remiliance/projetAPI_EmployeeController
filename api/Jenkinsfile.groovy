@@ -12,7 +12,9 @@ node {
    stage('Clone') {
         git 'https://github.com/remiliance/projetAPI_EmployeeController.git'
     }
- 
+   
+   dir('api') {
+    
     stage('Build Maven') {
         echo 'debut du build'
         sh 'cd api'
@@ -27,5 +29,6 @@ node {
          def customImage = docker.build("$imageName")
          customImage.push()
       }
+   }
    }
 }
