@@ -17,7 +17,6 @@ node {
     
     stage('Build Maven') {
         echo 'debut du build'
-        sh 'cd api'
         sh 'mvn -DskipTests=true package' 
         docker.build("$IMAGE", '.')
     }
