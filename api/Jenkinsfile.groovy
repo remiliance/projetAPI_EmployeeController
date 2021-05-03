@@ -10,7 +10,7 @@ node {
     def IMAGE="${registryProjet}:version-${env.BUILD_ID}"
    
    stage('Clone') {
-        git 'https://github.com/remiliance/projetAPI_EmployeeController.git'
+        git 'https://github.com/remiliance/projetAPI_EmployeeController/api.git'
     }
  
     stage('Build Maven') {
