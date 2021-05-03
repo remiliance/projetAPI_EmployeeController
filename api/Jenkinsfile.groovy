@@ -10,11 +10,12 @@ node {
     def IMAGE="${registryProjet}:version-${env.BUILD_ID}"
    
    stage('Clone') {
-        git 'https://github.com/remiliance/projetAPI_EmployeeController/api.git'
+        git 'https://github.com/remiliance/projetAPI_EmployeeController.git'
     }
  
     stage('Build Maven') {
         echo 'debut du build'
+        sh 'cd api'
         sh 'mvn -DskipTests=true package' 
         docker.build("$IMAGE", '.')
     }
