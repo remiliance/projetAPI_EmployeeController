@@ -11,9 +11,7 @@ node {
    
    stage('Clone') {
         git 'https://github.com/remiliance/projetAPI_EmployeeController.git'
-    }
- 
-
+     
     /* déterminer l'extension */
     if (branchName == "dev" ){
       extension = "-SNAPSHOT"
@@ -24,7 +22,7 @@ node {
     if (branchName == "master" ){
       extension = ""
     }
-
+   }
 
    dir('api') {
      /* Récupération du commitID long */
