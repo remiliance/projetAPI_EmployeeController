@@ -14,10 +14,9 @@ node {
    }
 
    dir('api') {
-   
+   stage('Build Maven') {
     /* Modification de la version dans le pom.xml */
     sh "sed -i s/'-XXX'/${extension}/g pom.xml"
-
     
     /* Récupération de la version du pom.xml après modification */
     def version = sh returnStdout: true, script: "cat pom.xml | grep -A1 '<artifactId>myapp1' | tail -1 |perl -nle 'm{.*<version>(.*)</version>.*};print \$1' | tr -d '\n'"
@@ -25,14 +24,10 @@ node {
      print """
      #################################################
         BanchName: $branchName
-        CommitID: $commitId
         AppVersion: $version
-        JobNumber: $buildNum
      #################################################
-        """
-
+        """    
     
-    stage('Build Maven') {
         echo 'debut du build'
         sh 'mvn package -Dmaven.test.skip=true' 
         docker.build("$IMAGE", '.')
