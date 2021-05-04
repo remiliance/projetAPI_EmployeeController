@@ -34,7 +34,7 @@ node {
      /* Docker - test */
     stage('DOCKER - check registry'){
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'my_registry_login',usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-      sh 'curl -sk --user $USERNAME:$PASSWORD https://192.168.5.5:5000/v2/myapp/tags/list'
+      sh 'curl -sk --user $USERNAME:$PASSWORD https://192.168.5.5:5000/v2/api/tags/list'
       }
     }
 
