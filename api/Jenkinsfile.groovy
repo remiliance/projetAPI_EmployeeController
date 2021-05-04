@@ -16,16 +16,6 @@ node {
    dir('api') {
    stage('Build Maven') {
 
-
-     print """
-     #################################################
-        BanchName: $branchName
-        CommitID: $commitId
-        AppVersion: $version
-        JobNumber: $buildNum
-     #################################################
-
-    
         echo 'debut du build'
         sh 'mvn package -Dmaven.test.skip=true' 
         docker.build("$IMAGE", '.')
