@@ -25,8 +25,9 @@ node {
    
    stage('Push') {
       docker.withRegistry('http://192.168.5.5:5000', 'my_registry_login') {
-         def customImage = docker.build("$imageName")
+         def customImage = docker.build("$imageName:${version}-${commitId}")
          customImage.push()
+
       }
    }
    }
