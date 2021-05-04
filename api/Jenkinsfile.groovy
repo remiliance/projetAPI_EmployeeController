@@ -17,7 +17,7 @@ node {
    stage('Build Maven') {
         
     /* Récupération de la version du pom.xml après modification */
-    def version = sh returnStdout: true, script: "cat pom.xml | grep -A1 '<artifactId>myapp1' | tail -1 |perl -nle 'm{.*<version>(.*)</version>.*};print \$1' | tr -d '\n'"
+    def version = sh returnStdout: true, script: "cat pom.xml | grep -A1 '<artifactId>api' | tail -1 |perl -nle 'm{.*<version>(.*)</version>.*};print \$1' | tr -d '\n'"
 
      print """
      #################################################
