@@ -1,5 +1,6 @@
 package com.webetapi.api.kafka;
 
+import com.webetapi.api.model.Employee;
 import com.webetapi.api.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +15,9 @@ public class AvroProducer {
     private static final String TOPIC = "topicRemil2";
 
     @Autowired
-    private KafkaTemplate<String, User> kafkaTemplate;
+    private KafkaTemplate<String, Employee> kafkaTemplate;
 
-    public void send(User user) {
+    public void send(Employee user) {
         LOGGER.info("sending user='{}'", user.toString());
         kafkaTemplate.send(TOPIC, user);
     }

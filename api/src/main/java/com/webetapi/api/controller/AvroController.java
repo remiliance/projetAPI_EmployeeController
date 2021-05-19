@@ -2,6 +2,7 @@ package com.webetapi.api.controller;
 
 
 import com.webetapi.api.kafka.AvroProducer;
+import com.webetapi.api.model.Employee;
 import com.webetapi.api.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ public class AvroController {
     }
 
     @PostMapping(value = "/postUser")
-    public String postAvroMessage(@RequestBody User user){
+    public String postAvroMessage(@RequestBody Employee user){
         this.producer.send(user);
         return "Message published successfully";
     }

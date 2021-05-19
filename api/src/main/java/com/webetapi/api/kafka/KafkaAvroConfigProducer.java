@@ -3,6 +3,7 @@ package com.webetapi.api.kafka;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.webetapi.api.model.Employee;
 import com.webetapi.api.model.User;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -31,12 +32,12 @@ public class KafkaAvroConfigProducer {
     }
 
     @Bean
-    public ProducerFactory<String, User> producerFactory() {
+    public ProducerFactory<String, Employee> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
     @Bean
-    public KafkaTemplate<String, User> kafkaTemplate() {
+    public KafkaTemplate<String, Employee> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 

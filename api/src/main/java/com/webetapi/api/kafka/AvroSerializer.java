@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.xml.bind.DatatypeConverter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.generic.GenericDatumWriter;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.io.BinaryEncoder;
@@ -17,6 +18,43 @@ import org.apache.kafka.common.serialization.Serializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Slf4j
+public class AvroSerializer<T extends SpecificRecordBase> implements Serializer<T> {
+
+    @Override
+    public void configure(Map<String, ?> configs, boolean isKey) {
+        // do nothing
+    }
+
+    @Override
+    public byte[] serialize(String topic, T payload) {
+        byte[] bytes = null;
+        try {
+            if (payload != null) {
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                BinaryEncoder binaryEncoder = EncoderFactory.get().binaryEncoder(byteArrayOutputStream, null);
+                DatumWriter<GenericRecord> datumWriter = new GenericDatumWriter<>(payload.getSchema());
+                datumWriter.write(payload, binaryEncoder);
+                binaryEncoder.flush();
+                byteArrayOutputStream.close();
+                bytes = byteArrayOutputStream.toByteArray();
+
+            }
+        } catch (Exception e) {
+
+        }
+        return bytes;
+    }
+
+    @Override
+    public void close() {
+        // do nothing
+    }
+}
+
+
+
+/*
 public class AvroSerializer<T extends SpecificRecordBase> implements Serializer<T> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AvroSerializer.class);
@@ -58,4 +96,4 @@ public class AvroSerializer<T extends SpecificRecordBase> implements Serializer<
                     "Can't serialize data='" + data + "' for topic='" + topic + "'", ex);
         }
     }
-}
+}*/
