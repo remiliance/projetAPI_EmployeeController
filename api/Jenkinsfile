@@ -25,7 +25,7 @@ node {
     }
 
     stage('Push') {
-	    docker.withRegistry(registryUri,registryCredentialSet){
+	    docker.withRegistry('',registryCredentialSet){
 	   	img.push 'latest'
   		img.push()
       }   
