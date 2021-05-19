@@ -17,12 +17,15 @@ node {
    stage('Build Maven') {
         echo 'debut du build'
         sh 'mvn package -Dmaven.test.skip=true' 
-        docker.build("$IMAGE", '.')
+    
     }
-   
-   
-   stage('Push') {
-      docker.withRegistry('https://registry.gitlab.com','reg1') {
+	   
+   def img = stage('Build Docker Image') {
+          docker.build("$IMAGE",  '.')
+    }
+
+    stage('Push') {
+      docker.withRegistry('registry.gitlab.com/remiliance/registrydockerimage','reg1') {
 	   	img.push 'latest'
   		img.push()
       }   
