@@ -25,7 +25,7 @@ node {
     }
 
     stage('Push') {
-      docker.withRegistry('registry.gitlab.com/remiliance/registrydockerimage','reg1') {
+	    docker.withRegistry('https://registry.gitlab.com','reg1'){
 	   	img.push 'latest'
   		img.push()
       }   
