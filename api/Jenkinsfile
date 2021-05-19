@@ -5,10 +5,8 @@ node {
     
     print buildNum
     print branchName
-    environment {
-       registryCredentialSet = 'dockerhub'
-       registryUri = 'https://hub.docker.com/repository/docker/rliance/mondockerrepo'
-    }
+    def registryCredentialSet = 'dockerhub'
+    def registryUri = 'https://hub.docker.com/repository/docker/rliance/mondockerrepo'
     def IMAGE="${registryProjet}:version-${env.BUILD_ID}"
     	
    stage('Clone') {
