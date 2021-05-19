@@ -15,7 +15,6 @@ node {
 
    dir('api') {
    stage('Build Maven') {
-
         echo 'debut du build'
         sh 'mvn package -Dmaven.test.skip=true' 
         docker.build("$IMAGE", '.')
@@ -27,5 +26,6 @@ node {
 	   	img.push 'latest'
   		img.push()
       }   
+    }
    }
 }
