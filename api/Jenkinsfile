@@ -29,6 +29,7 @@ node {
 	   	img.push 'latest'
   		img.push()
       }   
+      sh "docker rmi $imageName:${buildNum}"
     }
    }
 }
