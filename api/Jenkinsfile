@@ -1,0 +1,31 @@
+node {
+ 
+    def buildNum = env.BUILD_NUMBER 
+    def branchName= env.BRANCH_NAME
+    
+    print buildNum
+    print branchName
+
+    def registryProjet='registry.gitlab.com/remiliance/registrydockerimage'
+    def IMAGE="${registryProjet}:version-${env.BUILD_ID}"
+   
+   stage('Clone') {
+        git 'https://github.com/remiliance/projetAPI_EmployeeController.git'
+   }
+
+   dir('api') {
+   stage('Build Maven') {
+
+        echo 'debut du build'
+        sh 'mvn package -Dmaven.test.skip=true' 
+        docker.build("$IMAGE", '.')
+    }
+   
+   
+   stage('Push') {
+      docker.withRegistry('https://registry.gitlab.com','reg1') {
+	   	img.push 'latest'
+  		img.push()
+      }   
+   }
+}
