@@ -6,9 +6,11 @@ node {
     print buildNum
     print branchName
 
-    def registryProjet='registry.gitlab.com/remiliance/registrydockerimage'
+    environment {
+    registry = "https://hub.docker.com/repository/docker/rliance/mondockerrepo"
     def IMAGE="${registryProjet}:version-${env.BUILD_ID}"
-   
+    }
+	
    stage('Clone') {
         git 'https://github.com/remiliance/projetAPI_EmployeeController.git'
    }
@@ -25,7 +27,7 @@ node {
     }
 
     stage('Push') {
-	    docker.withRegistry('https://registry.gitlab.com','reg3'){
+	    docker.withRegistry('https://hub.docker.com/repository/docker/rliance/mondockerrepo','dockerhub'){
 	   	img.push 'latest'
   		img.push()
       }   
