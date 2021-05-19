@@ -5,12 +5,8 @@ node {
     
     print buildNum
     print branchName
-
-    environment {
-    registry = "https://hub.docker.com/repository/docker/rliance/mondockerrepo"
     def IMAGE="${registryProjet}:version-${env.BUILD_ID}"
-    }
-	
+    	
    stage('Clone') {
         git 'https://github.com/remiliance/projetAPI_EmployeeController.git'
    }
