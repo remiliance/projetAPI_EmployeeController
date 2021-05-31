@@ -7,7 +7,7 @@ node {
     print buildNum
     print branchName
 	
-   def registry = "rliance/mondockerrepo" 
+   def registry = "rliance/mondockerrepo:tagname" 
    def registryCredential = 'dockerhub' 
     
     //def registryCredential = 'dockerhub'
