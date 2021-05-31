@@ -23,7 +23,7 @@ node {
     }
 	   
    stage('Build Docker Image') {
-         image = docker.build("api_employee/myapp","MyAwesomeApp")
+         image = docker.build("api_employee/myapp",  '.')
     }
 
     stage('Push') {
