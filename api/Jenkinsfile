@@ -7,8 +7,7 @@ node {
     print buildNum
     print branchName
 	
-   def registry = "rliance/mondockerrepo:tagname" 
-   def registryCredential = 'dockerhub' 
+
     
     //def registryCredential = 'dockerhub'
     //def registry = 'https://hub.docker.com/repository/docker/rliance/mondockerrepo'
@@ -30,8 +29,8 @@ node {
     }
 
     stage('Push') {
-	    docker.withRegistry( '',registryCredential){
-	    image.push()
+	   withDockerRegistry([ credentialsID: "dockerhub", url: "" ]){
+	    sh "docker push rliance/mondockerrepo:latest"
       }   
       sh "docker rmi $imageName:${buildNum}"
     }
