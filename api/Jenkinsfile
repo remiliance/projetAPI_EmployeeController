@@ -5,9 +5,9 @@ node {
     
     print buildNum
     print branchName
-    def registryCredential = 'dockerhub'
-    def registryProjet = 'https://hub.docker.com/repository/docker/rliance/mondockerrepo'
-    def IMAGE="${registryProjet}:version-${env.BUILD_ID}"
+    //def registryCredential = 'dockerhub'
+    //def registry = 'https://hub.docker.com/repository/docker/rliance/mondockerrepo'
+    //def IMAGE="rliance/mondockerrepo:version-${env.BUILD_ID}"
     	
    stage('Clone') {
         git 'https://github.com/remiliance/projetAPI_EmployeeController.git'
@@ -20,14 +20,13 @@ node {
     
     }
 	   
-   def img = stage('Build Docker Image') {
-          docker.build("$IMAGE",  '.')
+   stage('Build Docker Image') {
+         image = docker.build("api_employee/myapp","MyAwesomeApp")
     }
 
     stage('Push') {
-	    docker.withRegistry('',registryCredential){
-	   	img.push 'latest'
-  		img.push()
+	    withDockerRegistry([credentialsId: "dockerhub", url: "https;://inde.docker.io/v1/"]){
+	    image.push()
       }   
       sh "docker rmi $imageName:${buildNum}"
     }
