@@ -27,7 +27,7 @@ node {
     }
 
     stage('Push') {
-	    withDockerRegistry([credentialsId: "dockerhub", url: "https;://inde.docker.io/v1/"]){
+	    withDockerRegistry([credentialsId: "dockerhub", url: "https://index.docker.io/v1/"]){
 	    image.push()
       }   
       sh "docker rmi $imageName:${buildNum}"
